@@ -8,7 +8,5 @@
 import scrapy
 
 
-class MsScraperItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class DownloadLinkItem(scrapy.Item):
+    link = scrapy.Field()
