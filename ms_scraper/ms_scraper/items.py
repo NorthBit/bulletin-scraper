@@ -9,5 +9,7 @@ import scrapy
 
 
 class DownloadLinkItem(scrapy.Item):
+    bulletin = scrapy.Field()
+    product = scrapy.Field()
     file_urls = scrapy.Field()
     files = scrapy.Field()
