@@ -20,5 +20,5 @@ class BulletinsSpider(scrapy.Spider):
     def download_updates(self, response):
         for link in response.css('td.file-link a::attr("href")').extract():
             item = DownloadLinkItem()
-            item['link'] = link
+            item['file_urls'] = [link]
             yield item

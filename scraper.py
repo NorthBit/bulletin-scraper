@@ -1,5 +1,7 @@
 import scrapy
 
+import scrapy.pipelines.files
+
 # From Monthly Update
 # print set(response.css('td[data-th="Bulletin ID"] a::attr("href")').extract())
 

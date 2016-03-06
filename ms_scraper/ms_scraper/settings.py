@@ -61,9 +61,10 @@ NEWSPIDER_MODULE = 'ms_scraper.spiders'
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'ms_scraper.pipelines.SomePipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'scrapy.pipelines.files.FilesPipeline' : 300,
+}
+FILES_STORE = r'C:\Temp\scraped'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
