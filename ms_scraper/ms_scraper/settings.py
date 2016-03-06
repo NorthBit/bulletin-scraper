@@ -62,7 +62,9 @@ NEWSPIDER_MODULE = 'ms_scraper.spiders'
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy.pipelines.files.FilesPipeline' : 300,
+    # 'scrapy.pipelines.files.FilesPipeline' : 300,
+    'ms_scraper.pipelines.MsuDownloadPipeline' : 300,
+    'ms_scraper.pipelines.MsuExtractPipeline' : 500,
 }
 FILES_STORE = r'C:\Temp\scraped'
 

@@ -11,5 +11,6 @@ import scrapy
 class DownloadLinkItem(scrapy.Item):
     bulletin = scrapy.Field()
     product = scrapy.Field()
-    file_urls = scrapy.Field()
+    url = scrapy.Field()
     files = scrapy.Field()
+    msu_path = scrapy.Field()

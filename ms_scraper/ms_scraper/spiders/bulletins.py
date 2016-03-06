@@ -6,11 +6,15 @@ from ..items import DownloadLinkItem
 
 class BulletinsSpider(scrapy.Spider):
     name = "bulletins"
-    start_urls = ['https://technet.microsoft.com/library/security/ms13-095']
+    start_urls = ['https://technet.microsoft.com/en-us/library/security/ms15-096.aspx']
 
     def parse(self, response):
+        visited_urls = set()
         for link in response.css('td a'):
             url = link.css('::attr(href)').extract_first()
+            if url in visited_urls:
+                continue
+            visited_urls.add(url)
             if 'familyid' not in url.lower():
                 continue
             text = link.css('::text').extract_first()
@@ -25,9 +29,9 @@ class BulletinsSpider(scrapy.Spider):
                              self.download_updates, meta=response.meta)
 
     def download_updates(self, response):
-        for link in response.css('td.file-link a::attr("href")').extract():
+        for url in response.css('td.file-link a::attr("href")').extract():
             item = DownloadLinkItem()
-            item['file_urls'] = [link]
+            item['url'] = url
             item['product'] = response.meta['product']
             item['bulletin'] = response.meta['bulletin']
             yield item
