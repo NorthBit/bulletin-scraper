@@ -48,8 +48,10 @@ class MsuExtractPipeline(object):
         extract_dir = os.path.join(msu_dir, msu_name)
         os.mkdir(extract_dir)
 
+        #TODO: Remove rubbish files.
         extract_cab = '{}.cab'.format(msu_name)
         expand(msu_path, extract_dir, extract_cab)
-        expand(os.path.join(extract_dir, extract_cab), extract_dir)
+        filter_ = spider.settings.get('EXTRACT_FILTER', None)
+        expand(os.path.join(extract_dir, extract_cab), extract_dir, filter_=filter_)
         symchk(extract_dir)
         return item

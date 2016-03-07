@@ -20,12 +20,10 @@ class BulletinsSpider(scrapy.Spider):
             url = link.xpath('@href').extract_first()
 
             yield scrapy.Request(response.urljoin(url), self.parse_bulletin_table)
-            break
 
     def parse_bulletin_table(self, response):
         for url in response.xpath('//td/p/a/@href').extract():
             yield scrapy.Request(response.urljoin(url), self.parse_bulletin_page)
-            break
 
     def parse_bulletin_page(self, response):
         visited_urls = set()
@@ -37,6 +35,10 @@ class BulletinsSpider(scrapy.Spider):
             if 'familyid' not in url.lower():
                 continue
             text = link.css('::text').extract_first()
+
+            if self.settings['PLATFORM_LIST']:
+                if text not in self.settings['PLATFORM_LIST']:
+                    continue
 
             request = scrapy.Request(response.urljoin(url), self.resolve_download_page)
             request.meta['bulletin'] = response.url.rsplit('/', 1)[-1].rsplit('.', 1)[0]

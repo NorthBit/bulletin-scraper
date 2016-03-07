@@ -15,6 +15,10 @@ SPIDER_MODULES = ['ms_scraper.spiders']
 NEWSPIDER_MODULE = 'ms_scraper.spiders'
 
 
+PLATFORM_LIST = ['Windows 7 for 32-bit Systems Service Pack 1']
+EXTRACT_FILTER = 'rpcrt4.dll'
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ms_scraper (+http://www.yourdomain.com)'
 
