@@ -22,7 +22,9 @@ def symchk(path):
 
 class MsuDownloadPipeline(scrapy.pipelines.files.FilesPipeline):
     def get_media_requests(self, item, info):
-        yield scrapy.Request(item['url'])
+        request = scrapy.Request(item['url'])
+        request.meta['bulletin'] = item['bulletin']
+        yield request
 
     def item_completed(self, results, item, info):
         file_paths = (result['path'] for ok, result in results if ok)
@@ -31,6 +33,11 @@ class MsuDownloadPipeline(scrapy.pipelines.files.FilesPipeline):
             raise DropItem("Item is not an MSU")
         item['msu_path'] = msu_paths[0]
         return item
+
+    def file_path(self, request, response=None, info=None):
+        bulletin = request.meta['bulletin'].upper()
+        path = os.path.join(bulletin, request.url.rsplit('/',1)[-1])
+        return path
 
 
 class MsuExtractPipeline(object):

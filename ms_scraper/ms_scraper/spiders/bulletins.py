@@ -20,7 +20,7 @@ class BulletinsSpider(scrapy.Spider):
             text = link.css('::text').extract_first()
 
             request = scrapy.Request(response.urljoin(url), self.resolve_download_page)
-            request.meta['bulletin'] = response.url.rsplit('/', 1)[-1]
+            request.meta['bulletin'] = response.url.rsplit('/', 1)[-1].rsplit('.', 1)[0]
             request.meta['product'] = text
             yield request
 
