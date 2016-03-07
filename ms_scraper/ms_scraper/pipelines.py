@@ -45,7 +45,7 @@ class MsuExtractPipeline(object):
         msu_path = os.path.join(spider.settings['FILES_STORE'], item['msu_path'])
         msu_dir = os.path.dirname(msu_path)
         msu_name = item['url'].rsplit('/', 1)[-1].rsplit('.', 1)[0]
-        extract_dir = os.path.join(msu_dir, '{}-{}'.format(item['bulletin'].upper(), msu_name))
+        extract_dir = os.path.join(msu_dir, msu_name)
         os.mkdir(extract_dir)
 
         extract_cab = '{}.cab'.format(msu_name)

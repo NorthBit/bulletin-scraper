@@ -6,9 +6,28 @@ from ..items import DownloadLinkItem
 
 class BulletinsSpider(scrapy.Spider):
     name = "bulletins"
-    start_urls = ['https://technet.microsoft.com/en-us/library/security/ms15-096.aspx']
+    start_urls = ['https://technet.microsoft.com/en-us/library/security/dn631937.aspx']
 
     def parse(self, response):
+        for link in response.xpath('//a[string-length(@title)=4]'):
+            title = link.xpath('@title').extract_first()
+            try:
+                year = int(title)
+            except ValueError:
+                # We need only the years!
+                continue
+
+            url = link.xpath('@href').extract_first()
+
+            yield scrapy.Request(response.urljoin(url), self.parse_bulletin_table)
+            break
+
+    def parse_bulletin_table(self, response):
+        for url in response.xpath('//td/p/a/@href').extract():
+            yield scrapy.Request(response.urljoin(url), self.parse_bulletin_page)
+            break
+
+    def parse_bulletin_page(self, response):
         visited_urls = set()
         for link in response.css('td a'):
             url = link.css('::attr(href)').extract_first()
