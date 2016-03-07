@@ -18,6 +18,9 @@ NEWSPIDER_MODULE = 'ms_scraper.spiders'
 PLATFORM_LIST = ['Windows 7 for 32-bit Systems Service Pack 1']
 EXTRACT_FILTER = 'rpcrt4.dll'
 
+SYMCHK_PATH = r'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\symchk.exe'
+SYM_PATH = r'SRV*c:\temp\symbols*https://msdl.microsoft.com/download/symbols'
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ms_scraper (+http://www.yourdomain.com)'

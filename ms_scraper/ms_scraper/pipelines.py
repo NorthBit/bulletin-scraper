@@ -17,8 +17,12 @@ SYM_PATH = r'SRV*c:\temp\symbols*https://msdl.microsoft.com/download/symbols'
 def expand(source, dest, filter_='*'):
     subprocess.call(['expand', '-F:{}'.format(filter_), source, dest])
 
-def symchk(path):
-    subprocess.call([SYMCHK_PATH, '/r', path, '/s', SYM_PATH, ])
+def symchk(path, symchk_path=None, sym_path=None):
+    if symchk_path is None:
+        symchk_path = SYMCHK_PATH
+    if sym_path is None:
+        sym_path = SYM_PATH
+    subprocess.call([symchk_path, '/r', path, '/s', sym_path, ])
 
 class MsuDownloadPipeline(scrapy.pipelines.files.FilesPipeline):
     def get_media_requests(self, item, info):
@@ -53,5 +57,7 @@ class MsuExtractPipeline(object):
         expand(msu_path, extract_dir, extract_cab)
         filter_ = spider.settings.get('EXTRACT_FILTER', None)
         expand(os.path.join(extract_dir, extract_cab), extract_dir, filter_=filter_)
-        symchk(extract_dir)
+        symchk_path = spider.settings.get('SYMCHK_PATH', None)
+        sym_path = spider.settings.get('SYM_PATH', None)
+        symchk(extract_dir, symchk_path=symchk_path, sym_path=sym_path)
         return item
