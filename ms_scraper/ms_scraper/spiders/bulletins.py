@@ -36,9 +36,8 @@ class BulletinsSpider(scrapy.Spider):
                 continue
             text = link.css('::text').extract_first()
 
-            if self.settings['PLATFORM_LIST']:
-                if text not in self.settings['PLATFORM_LIST']:
-                    continue
+            if text not in self.settings.get['PRODUCT_LIST', []]:
+                continue
 
             request = scrapy.Request(response.urljoin(url), self.resolve_download_page)
             request.meta['bulletin'] = response.url.rsplit('/', 1)[-1].rsplit('.', 1)[0]

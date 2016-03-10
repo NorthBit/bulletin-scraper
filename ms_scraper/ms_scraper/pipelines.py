@@ -37,15 +37,16 @@ def symchk(path, symchk_path=None, sym_path=None, output_dir=None):
 
 class MsuDownloadPipeline(scrapy.pipelines.files.FilesPipeline):
     def get_media_requests(self, item, info):
-        request = scrapy.Request(item['url'])
+        url = item['url']
+        if not url.lower().endswith('.msu'):
+            raise DropItem('Item not an MSU')
+        request = scrapy.Request(url)
         request.meta['bulletin'] = item['bulletin']
         yield request
 
     def item_completed(self, results, item, info):
         file_paths = (result['path'] for ok, result in results if ok)
         msu_paths = [path for path in file_paths if path.lower().endswith('.msu')]
-        if not msu_paths:
-            raise DropItem("Item is not an MSU")
         item['msu_path'] = msu_paths[0]
         return item
 
@@ -86,17 +87,6 @@ class MsuExtractPipeline(object):
             except WindowsError:
                 pass
 
-        if spider.settings.get('DELETE_EMPTY_DIRS', True):
-            drop_item = False
-            if not os.listdir(extract_dir):
-                os.rmdir(extract_dir)
-                drop_item = True
-
-            if not os.listdir(msu_dir):
-                os.rmdir(msu_dir)
-
-            if drop_item:
-                raise DropItem('No item found.')
 
         return item
 

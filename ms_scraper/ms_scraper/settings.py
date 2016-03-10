@@ -15,8 +15,11 @@ SPIDER_MODULES = ['ms_scraper.spiders']
 NEWSPIDER_MODULE = 'ms_scraper.spiders'
 
 
-PLATFORM_LIST = None
-EXTRACT_FILTER = 'ntdll.dll'
+# List of products to download, based on the names on the bulletin pages.
+PRODUCT_LIST = []
+
+# Set a filter for cab extraction. Note that it only affects the extraction.
+EXTRACT_FILTER = None
 
 ## Set `DONT_DOWNLOAD_SYMBOLS` to `True` to prevent downloading symbols.
 DONT_DOWNLOAD_SYMBOLS = False
@@ -28,13 +31,11 @@ SYM_PATH = r'SRV*c:\temp\symbols*https://msdl.microsoft.com/download/symbols'
 DOWNLOAD_SYMBOLS_TO = r'c:\temp\syms'
 
 # Delete `.msu` files after extraction
-DELETE_MSU_FILES = True
+DELETE_MSU_FILES = False
 
 # Delete rubbish files (the `.msu` files are full of them!)
 DELETE_RUBBISH = True
 
-# Delete empty directories
-DELETE_EMPTY_DIRS = True
 
 ITEM_PIPELINES = {
     'ms_scraper.pipelines.MsuDownloadPipeline' : 300,
