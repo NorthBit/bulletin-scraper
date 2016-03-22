@@ -2,6 +2,7 @@
 
 This is a scraping tool to download all bulletin `.msu` files, extract the executables and download relevant symbols.
 
+Be warned, downloading everything eats up a lot of disk space.
 
 ## Dependencies
 
