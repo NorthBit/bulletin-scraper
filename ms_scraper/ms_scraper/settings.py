@@ -25,10 +25,7 @@ EXTRACT_FILTER = None
 DONT_DOWNLOAD_SYMBOLS = False
 
 SYMCHK_PATH = r'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\symchk.exe'
-SYM_PATH = r'SRV*c:\temp\symbols*https://msdl.microsoft.com/download/symbols'
-
-# Set a path to download symbols to. Otherwise - uses what is in `SYM_PATH`.
-DOWNLOAD_SYMBOLS_TO = r'c:\temp\syms'
+SYM_PATH = r'SRV*C:\temp\symbols*https://msdl.microsoft.com/download/symbols'
 
 # Delete `.msu` files after extraction
 DELETE_MSU_FILES = False
@@ -41,4 +38,4 @@ ITEM_PIPELINES = {
     'ms_scraper.pipelines.MsuDownloadPipeline' : 300,
     'ms_scraper.pipelines.MsuExtractPipeline' : 500,
 }
-FILES_STORE = r'C:\Temp\scraped'
+FILES_STORE = r'.\scraped'

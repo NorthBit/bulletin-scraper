@@ -36,7 +36,8 @@ class BulletinsSpider(scrapy.Spider):
                 continue
             text = link.css('::text').extract_first()
 
-            if text not in self.settings.get['PRODUCT_LIST', []]:
+
+            if self.settings['PRODUCT_LIST'] and text not in self.settings['PRODUCT_LIST']:
                 continue
 
             request = scrapy.Request(response.urljoin(url), self.resolve_download_page)
