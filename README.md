@@ -14,15 +14,15 @@ This is a scraping tool to download all bulletin `.msu` files, extract the execu
 
 ```bash
 git clone <repo-path> bulletin-scraper
-cd bulletin-scraper
+cd bulletin_scraper
 scrapy crawl bulletins
 ```
 
 
 ## Configuration
 
-The scraper's configuration is saved in `bullletin_scraper\settings.py`. There are some settings you MUST configure yourself.
+The scraper's configuration is saved in `bulletin_scraper\bulletin_scraper\settings.py`. There are some settings you MUST configure yourself.
 
-1. `FILES_STORE` - the location ot which the bulletins will be downloaded.
+1. `FILES_STORE` - the location ot which the bulletins will be downloaded. The default location is a `bulletins` directory under the scraper root.
 1. `SYMCHK_PATH` - the path to `symchk.exe`
 1. `SYM_PATH` - the symbol path. The default local store is `C:\temp\symbols`.

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for bullletin_scraper project
+# Scrapy settings for bulletin_scraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -46,13 +46,13 @@ DELETE_RUBBISH = True
 #                           #
 #############################
 
-BOT_NAME = 'bullletin_scraper'
+BOT_NAME = 'bulletin_scraper'
 
-SPIDER_MODULES = ['bullletin_scraper.spiders']
-NEWSPIDER_MODULE = 'bullletin_scraper.spiders'
+SPIDER_MODULES = ['bulletin_scraper.spiders']
+NEWSPIDER_MODULE = 'bulletin_scraper.spiders'
 
 
 ITEM_PIPELINES = {
-    'bullletin_scraper.pipelines.MsuDownloadPipeline' : 300,
-    'bullletin_scraper.pipelines.MsuExtractPipeline' : 500,
+    'bulletin_scraper.pipelines.MsuDownloadPipeline' : 300,
+    'bulletin_scraper.pipelines.MsuExtractPipeline' : 500,
 }
