@@ -9,11 +9,20 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'ms_scraper'
+#############################
+#                           #
+#     User Configuration    #
+#                           #
+#############################
 
-SPIDER_MODULES = ['ms_scraper.spiders']
-NEWSPIDER_MODULE = 'ms_scraper.spiders'
+# Where to store the downloaded bulletins
+FILES_STORE = r'.\bulletins'
 
+# The location of the `symchk` executable
+SYMCHK_PATH = r'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\symchk.exe'
+
+# The symbol path to use. This also determines where the symbols are saved to.
+SYM_PATH = r'SRV*C:\temp\symbols*https://msdl.microsoft.com/download/symbols'
 
 # List of products to download, based on the names on the bulletin pages.
 PRODUCT_LIST = []
@@ -24,9 +33,6 @@ EXTRACT_FILTER = None
 ## Set `DONT_DOWNLOAD_SYMBOLS` to `True` to prevent downloading symbols.
 DONT_DOWNLOAD_SYMBOLS = False
 
-SYMCHK_PATH = r'C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\symchk.exe'
-SYM_PATH = r'SRV*C:\temp\symbols*https://msdl.microsoft.com/download/symbols'
-
 # Delete `.msu` files after extraction
 DELETE_MSU_FILES = False
 
@@ -34,8 +40,19 @@ DELETE_MSU_FILES = False
 DELETE_RUBBISH = True
 
 
+#############################
+#                           #
+#     DO NOT CHANGE!!!      #
+#                           #
+#############################
+
+BOT_NAME = 'ms_scraper'
+
+SPIDER_MODULES = ['ms_scraper.spiders']
+NEWSPIDER_MODULE = 'ms_scraper.spiders'
+
+
 ITEM_PIPELINES = {
     'ms_scraper.pipelines.MsuDownloadPipeline' : 300,
     'ms_scraper.pipelines.MsuExtractPipeline' : 500,
 }
-FILES_STORE = r'.\scraped'

@@ -1,22 +1,28 @@
-# MS Scraper
+# MS Bulletin Scraper
 
-Scrape security bulletins and `.pdb`s using Scrapy.
+This is a scraping tool to download all bulletin `.msu` files, extract the executables and download relevant symbols.
 
-## Current status
 
-Can scrape `.msu` files and extract contents and `.pdb`-s.
-More work is required to allow extraction of older files.
+## Dependencies
+
+1. [Scrapy](http://scrapy.org/), install using `pip install scrapy`.
+1. To download symbols, the script uses `Symchk.exe`. So you'll need to install [Windbg](https://msdn.microsoft.com/en-us/windows/hardware/hh852365.aspx).
+1. We also use `expand.exe` to expand the `.msu` files, so you need to run this on Windows 7 or higher.
+
 
 ## Usage
 
-Under `settings.py`, you need to set the following:
+```bash
+git clone <repo-path> bulletin-scraper
+cd bulletin-scraper
+scrapy crawl bulletins
+```
 
-1. `PLATFORM_LIST` - all desired platforms. Comment out to allow all
-  platforms.
-1. `EXTRACT_FILTER` - Filter for the `msu` extraction. Set to desired
-   `.dll` file or comment out to get all.
-1. `FILES_STORE` - Location to store the extracted files.
-1. `SYMCHK_PATH` - Path to `symchk.exe`
-1. `SYM_PATH` - Symbol path.
 
-To run, `cd` into the `ms_scraper` directory, and run `scrapy crawl bulletins`.
+## Configuration
+
+The scraper's configuration is saved in `ms_scraper\settings.py`. There are some settings you MUST configure yourself.
+
+1. `FILES_STORE` - the location ot which the bulletins will be downloaded.
+1. `SYMCHK_PATH` - the path to `symchk.exe`
+1. `SYM_PATH` - the symbol path. The default local store is `C:\temp\symbols`.
