@@ -21,7 +21,7 @@ scrapy crawl bulletins
 
 ## Configuration
 
-The scraper's configuration is saved in `ms_scraper\settings.py`. There are some settings you MUST configure yourself.
+The scraper's configuration is saved in `bullletin_scraper\settings.py`. There are some settings you MUST configure yourself.
 
 1. `FILES_STORE` - the location ot which the bulletins will be downloaded.
 1. `SYMCHK_PATH` - the path to `symchk.exe`
