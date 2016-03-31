@@ -15,7 +15,7 @@ Be warned, downloading everything eats up a lot of disk space.
 
 ```bash
 git clone https://github.com/NorthBit/bulletin-scraper.git bulletin-scraper
-cd bulletin_scraper
+cd bulletin-scraper\bulletin_scraper
 scrapy crawl bulletins
 ```
 
